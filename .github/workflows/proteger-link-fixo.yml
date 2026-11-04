@@ -1,0 +1,19 @@
+name: Proteger link fixo da Lumi
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  manter-endereco:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Confere arquivo da Lumi
+        run: |
+          test -f Lumi-teste.html || { echo "ERRO: Lumi-teste.html nao pode ser removido ou movido. O link fixo depende desse arquivo."; exit 1; }
+          echo "OK: Lumi-teste.html continua no endereco oficial."
