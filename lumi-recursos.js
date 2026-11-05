@@ -1,0 +1,12 @@
+/* Recursos educativos locais da Lumi. Não coleta dados. */
+window.lumiLesson=function(t,q){
+  function conta(){var e=q.replace(/,/g,'.').replace(/[^0-9+\-*/().% ]/g,'').trim();if(!e||e.length>70||!/^[0-9+\-*/().% ]+$/.test(e))return null;try{var r=Function('return ('+e+')')();return Number.isFinite(r)?'A resposta é '+(Math.round((r+Number.EPSILON)*1e6)/1e6)+'. Se quiser, explico a conta passo a passo.':null}catch(x){return null}}
+  if(/(conta|calcule|quanto e|quanto é|[0-9]\s*[+\-*/]\s*[0-9])/.test(t)){var n=conta();if(n)return n}
+  if(/corpo humano|coracao|coraçao|pulmao|pulmão|cerebro|cérebro/.test(t))return 'O corpo humano trabalha em equipe: cérebro coordena, coração bombeia sangue, pulmões colocam oxigênio no sangue e o estômago ajuda a transformar alimento em energia. Quer aprender por uma parte de cada vez?';
+  if(/wifi|wi-fi|internet sem fio/.test(t))return 'Wi-Fi leva a internet pelo ar usando ondas de rádio. O roteador recebe a internet por cabo ou fibra e manda o sinal para celular, TV e computador. Senhas e PINs existem para proteger a rede. Não é certo nem seguro tentar pegar o PIN ou a senha de Wi-Fi de outra pessoa.';
+  if(/como foi feito.*(ser humano|humano)|origem.*(ser humano|humano)|evolucao humana|evolução humana/.test(t))return 'Pela ciência, os seres humanos surgiram por evolução durante milhões de anos, com ancestrais em comum com outros primatas. Religiões explicam essa origem de jeitos diferentes. Posso explicar a visão científica ou religiosa com respeito.';
+  if(/como foi feito.*cachorro|origem.*cachorro|cachorro.*evolu/.test(t))return 'Os cachorros descendem de lobos. Há milhares de anos, alguns lobos se aproximaram das pessoas e foram sendo criados por quem era mais dócil. Com muitas gerações, surgiram os cães e depois as diferentes raças.';
+  if(/como foi feito deus|quem criou deus|criou deus/.test(t))return 'Na Bíblia e em muitas tradições cristãs, Deus não foi criado: Ele é eterno e criador de tudo. Outras religiões e pessoas entendem isso de outras formas. Posso explicar uma passagem bíblica com respeito.';
+  if(/biblia|bíblia|jesus|noe|noé|moises|moisés/.test(t))return 'Posso conversar sobre a Bíblia com respeito. Ela reúne livros escritos em épocas diferentes e, para cristãos, traz ensinamentos sobre Deus, fé e como cuidar das pessoas. Qual história ou parte você quer entender?';
+  return null;
+};
