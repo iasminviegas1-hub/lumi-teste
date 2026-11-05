@@ -1,4 +1,4 @@
-name: Restaurar tela anterior da Lumi
+name: Restaurar tela oficial da Lumi
 on:
   push:
     paths:
@@ -12,11 +12,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Restaurar a tela aprovada
+      - name: Restaurar tela e conversa
         run: |
           git show 7bdc78c28744ba8d8929e8eb43cbd2172fd8c5d2:Lumi-teste.html > Lumi-teste.html
-          git config user.name "Lumi Restore"
+          sed -i "s#</html>#<script src=\"lumi-conversa.js\"></script></html>#" Lumi-teste.html
+          git config user.name "Proteção da Lumi"
           git config user.email "actions@github.com"
           git add Lumi-teste.html
-          git diff --cached --quiet || git commit -m "Restaura tela original da Lumi"
+          git diff --cached --quiet || git commit -m "Atualiza conversa sem mudar a tela"
           git push
