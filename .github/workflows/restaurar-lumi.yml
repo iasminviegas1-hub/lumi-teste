@@ -1,1 +1,22 @@
-name: Restaurar tela original\non:\n  push:\n    paths: [.restore-lumi-trigger]\npermissions:\n  contents: write\njobs:\n  restaurar:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with: {fetch-depth: 0}\n      - run: |\n          git show e7f73bf2fb7f143dbb9eb1ef695bba50decae487:Lumi-teste.html > Lumi-teste.html\n          git config user.name "Proteção da Lumi"\n          git config user.email "actions@github.com"\n          git add Lumi-teste.html\n          git diff --cached --quiet || git commit -m "Restaura tela original da Lumi"\n          git push
+name: Restaurar tela original da Lumi
+on:
+  push:
+    paths:
+      - '.restore-lumi-trigger'
+permissions:
+  contents: write
+jobs:
+  restaurar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restaurar a tela
+        run: |
+          git show e7f73bf2fb7f143dbb9eb1ef695bba50decae487:Lumi-teste.html > Lumi-teste.html
+          git config user.name 'Proteção da Lumi'
+          git config user.email 'actions@github.com'
+          git add Lumi-teste.html
+          git diff --cached --quiet || git commit -m 'Restaura tela original da Lumi'
+          git push
