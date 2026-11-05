@@ -1,0 +1,22 @@
+name: Restaurar cerebro seguro da Lumi
+on:
+  push:
+    paths:
+      - .restore-worker-trigger
+permissions:
+  contents: write
+jobs:
+  restaurar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restaurar worker funcional
+        run: |
+          git show f98b0f5:lumi-brain-worker.js > lumi-brain-worker.js
+          git config user.name \"Proteção da Lumi\"
+          git config user.email \"actions@github.com\"
+          git add lumi-brain-worker.js
+          git diff --cached --quiet || git commit -m \"Restaura cerebro funcional da Lumi\"
+          git push
