@@ -1,0 +1,22 @@
+name: Restaurar tela anterior da Lumi
+on:
+  push:
+    paths:
+      - .restore-lumi-trigger
+permissions:
+  contents: write
+jobs:
+  restaurar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restaurar a tela aprovada
+        run: |
+          git show 7bdc78c28744ba8d8929e8eb43cbd2172fd8c5d2:Lumi-teste.html > Lumi-teste.html
+          git config user.name "Lumi Restore"
+          git config user.email "actions@github.com"
+          git add Lumi-teste.html
+          git diff --cached --quiet || git commit -m "Restaura tela original da Lumi"
+          git push
